@@ -3,7 +3,7 @@ import subprocess
 import json
 import shlex
 
-from classes.utils.Print import Print
+from py_libs.Print import Print
 
 
 class Command:
