@@ -28,6 +28,15 @@ class Menu:
         tb.show(title, columns, rows, row_styles=row_styles)
 
     @classmethod
+    def print_grid(cls, items: List[str], color: str = "blue"):
+        """
+        Print a list of items laid out in a multi-column grid,
+        auto-sized to the terminal width.
+        """
+        tb = MyTable()
+        tb.show_grid(items, color=color)
+
+    @classmethod
     def choose_option(cls):
         """
         Prompt the user to choose an option from the menu.
