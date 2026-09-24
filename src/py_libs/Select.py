@@ -27,7 +27,7 @@ class Select:
     @staticmethod
     def select_questionary(options: List[str]) -> List[str]:
         selected = questionary.checkbox(
-            "Select a few options:", choices=options).ask()
+            "Select options:", choices=options).ask()
         return selected
 
     @staticmethod
