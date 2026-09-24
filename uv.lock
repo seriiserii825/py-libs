@@ -47,9 +47,9 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "questionary", specifier = "==2.1.0" },
-    { name = "rich", specifier = "==14.0.0" },
-    { name = "simple-term-menu", specifier = "==1.6.6" },
+    { name = "questionary", specifier = ">=2.1.0" },
+    { name = "rich", specifier = ">=13.9.4" },
+    { name = "simple-term-menu", specifier = ">=1.6.6" },
 ]
 
 [[package]]

@@ -4,9 +4,9 @@ version = "0.1.0"
 description = "Shared CLI utility classes (Select, Command, Menu, Print, ...) reused across projects"
 requires-python = ">=3.10,<4.0"
 dependencies = [
-    "rich==14.0.0",
-    "questionary==2.1.0",
-    "simple-term-menu==1.6.6",
+    "rich>=13.9.4",
+    "questionary>=2.1.0",
+    "simple-term-menu>=1.6.6",
 ]
 
 [build-system]
