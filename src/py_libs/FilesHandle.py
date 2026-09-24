@@ -132,3 +132,6 @@ class FilesHandle:
         with open(file_path, "a") as f:
             f.write(text)
         Command.run(f"bat '{file_path}'")
+
+    def draw_tree(self, path_to_dir):
+        Command.run(f"tree '{path_to_dir}'")
