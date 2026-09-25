@@ -64,6 +64,11 @@ class FilesHandle:
     def directory_is_empty(self, path_to_dir) -> bool:
         return os.path.exists(path_to_dir) and len(os.listdir(path_to_dir)) == 0
 
+    def ensure_dir(self, path_to_dir) -> str:
+        """Create the directory (and parents) if it doesn't exist, silently."""
+        os.makedirs(path_to_dir, exist_ok=True)
+        return path_to_dir
+
     def create_or_choose_directory(self, path_to_dir="") -> str:
         abs_path = str(Path(path_to_dir).resolve())
         if not os.path.exists(abs_path):
