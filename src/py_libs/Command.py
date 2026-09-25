@@ -26,8 +26,7 @@ class Command:
             # Ruff writes lint errors to stdout, many other tools use stderr.
             output = (err.stderr or err.stdout).strip()
             # ➜ raise a *plain* message; style it where you print it
-            raise RuntimeError(
-                f"Command '{cmd}' failed with:\n{output}") from err
+            raise RuntimeError(f"Command '{cmd}' failed with:\n{output}") from err
 
     @staticmethod
     def run_quiet(cmd: str) -> str:
@@ -43,8 +42,7 @@ class Command:
             return result.stdout.strip()
         except subprocess.CalledProcessError as err:
             output = (err.stderr or err.stdout).strip()
-            raise RuntimeError(
-                f"Command '{cmd}' failed with:\n{output}") from err
+            raise RuntimeError(f"Command '{cmd}' failed with:\n{output}") from err
 
     @staticmethod
     def run_json(cmd: str) -> list | dict:

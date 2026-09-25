@@ -9,8 +9,7 @@ class Rsync:
     @staticmethod
     def _ssh_rsh(password: str, port: int | str) -> str:
         return (
-            f"sshpass -p {password} ssh -p {port} "
-            "-o StrictHostKeyChecking=accept-new"
+            f"sshpass -p {password} ssh -p {port} -o StrictHostKeyChecking=accept-new"
         )
 
     @staticmethod

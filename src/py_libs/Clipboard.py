@@ -24,9 +24,11 @@ class Clipboard:
             if Clipboard._is_wayland():
                 return subprocess.check_output(["wl-paste"]).decode().strip()
             elif Clipboard._is_x11():
-                return subprocess.check_output(
-                    ["xclip", "-o", "-selection", "clipboard"]
-                ).decode().strip()
+                return (
+                    subprocess.check_output(["xclip", "-o", "-selection", "clipboard"])
+                    .decode()
+                    .strip()
+                )
             else:
                 return pyperclip.paste().strip()
         except Exception:

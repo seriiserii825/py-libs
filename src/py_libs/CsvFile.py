@@ -40,14 +40,10 @@ class CsvFile:
             return []
         return rows
 
-    def write_csv(
-        self, rows: list[dict], fieldnames: list[str] | None = None
-    ) -> None:
+    def write_csv(self, rows: list[dict], fieldnames: list[str] | None = None) -> None:
         if fieldnames is None:
             fieldnames = list(rows[0].keys()) if rows else []
-        with open(
-            self.file_path, "w", newline="", encoding="utf-8"
-        ) as csvfile:
+        with open(self.file_path, "w", newline="", encoding="utf-8") as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(rows)
