@@ -13,10 +13,12 @@ class Select:
             [
                 "fzf",
                 "--multi",
-                "--height", "50%",
+                "--height",
+                "50%",
                 "--reverse",
                 "--no-mouse",
-                "--bind", "ctrl-a:select-all,ctrl-r:toggle-all",
+                "--bind",
+                "ctrl-a:select-all,ctrl-r:toggle-all",
             ],
             input=input_text.encode(),
             stdout=subprocess.PIPE,
@@ -26,8 +28,7 @@ class Select:
 
     @staticmethod
     def select_questionary(options: List[str]) -> List[str]:
-        selected = questionary.checkbox(
-            "Select a few options:", choices=options).ask()
+        selected = questionary.checkbox("Select options:", choices=options).ask()
         return selected
 
     @staticmethod
