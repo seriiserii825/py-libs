@@ -35,8 +35,12 @@ class Clipboard:
             return pyperclip.paste().strip()
 
     @staticmethod
-    def write(text: str) -> None:
-        """Copy the given text to the clipboard and notify the desktop."""
+    def write(text: str, show: bool = True) -> None:
+        """Copy the given text to the clipboard and notify the desktop.
+
+        Pass ``show=False`` for secrets (e.g. passwords) so the text itself
+        is not displayed in the desktop notification.
+        """
         text = text.strip()
 
         try:
@@ -57,7 +61,7 @@ class Clipboard:
             warnings.simplefilter("ignore", UserWarning)
             plyer.notification.notify(
                 title="Buffer",
-                message=text,
+                message=text if show else "Copied to clipboard (hidden)",
                 app_name="Buffer",
                 timeout=5,
             )
