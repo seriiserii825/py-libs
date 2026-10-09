@@ -111,8 +111,14 @@ class Menu:
         if exit_label:
             lines.append(_markup_to_ansi(f"[{INDEX_COLOR}]00)[/] {exit_label}"))
         cmd = [
-            "fzf", "--ansi", "--reverse", "--no-mouse", "--no-sort",
-            "--height", "50%", "--print-query",
+            "fzf",
+            "--ansi",
+            "--reverse",
+            "--no-mouse",
+            "--no-sort",
+            "--height",
+            "50%",
+            "--print-query",
         ]
         if title:
             cmd += ["--header", title]
