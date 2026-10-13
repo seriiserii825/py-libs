@@ -116,6 +116,7 @@ class Menu:
             "--reverse",
             "--no-mouse",
             "--no-sort",
+            "--exact",
             "--height",
             "50%",
             "--print-query",

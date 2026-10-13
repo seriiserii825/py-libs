@@ -13,6 +13,7 @@ class Select:
             [
                 "fzf",
                 "--multi",
+                "--exact",
                 "--height",
                 "50%",
                 "--reverse",
@@ -56,7 +57,7 @@ class Select:
     def select_fzf_one(options) -> str | None:
         input_text = "\n".join(options)
         result = subprocess.run(
-            ["fzf", "--height", "50%", "--reverse", "--no-mouse"],
+            ["fzf", "--exact", "--height", "50%", "--reverse", "--no-mouse"],
             input=input_text.encode(),
             stdout=subprocess.PIPE,
         )
