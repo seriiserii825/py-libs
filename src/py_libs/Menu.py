@@ -1,4 +1,3 @@
-import subprocess
 from typing import List, Optional
 
 from rich import print
@@ -110,22 +109,18 @@ class Menu:
         ]
         if exit_label:
             lines.append(_markup_to_ansi(f"[{INDEX_COLOR}]00)[/] {exit_label}"))
-        cmd = [
-            "fzf",
+        args = [
             "--ansi",
             "--reverse",
             "--no-mouse",
             "--no-sort",
-            "--exact",
             "--height",
             "50%",
             "--print-query",
         ]
         if title:
-            cmd += ["--header", title]
-        result = subprocess.run(
-            cmd, input="\n".join(lines).encode(), stdout=subprocess.PIPE
-        )
+            args += ["--header", title]
+        result = Select.run_fzf(lines, args)
         if result.returncode not in (0, 1):
             return None
         output = result.stdout.decode().split("\n")

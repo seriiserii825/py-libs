@@ -1,5 +1,11 @@
+import os
+import shlex
 import subprocess
+import sys
+import tempfile
 from typing import List
+
+from py_libs import fzf_word_filter
 
 import questionary
 from simple_term_menu import TerminalMenu
@@ -7,13 +13,35 @@ from simple_term_menu import TerminalMenu
 
 class Select:
     @staticmethod
+    def run_fzf(lines: List[str], args: List[str]) -> subprocess.CompletedProcess:
+        """
+        Run fzf with the word-prefix filter (py_libs.fzf_word_filter)
+        instead of fzf's own matching: "resdow" finds "Restore from Downloads".
+        """
+        with tempfile.NamedTemporaryFile(
+            "w", suffix=".fzf", delete=False, encoding="utf-8"
+        ) as f:
+            f.write("\n".join(lines))
+        filter_cmd = " ".join(
+            shlex.quote(a)
+            for a in (sys.executable, fzf_word_filter.__file__)
+        )
+        reload_cmd = f"{filter_cmd} {{q}} {shlex.quote(f.name)} || true"
+        try:
+            return subprocess.run(
+                ["fzf", *args, "--disabled", "--bind", f"change:reload({reload_cmd})"],
+                input="\n".join(lines).encode(),
+                stdout=subprocess.PIPE,
+            )
+        finally:
+            os.unlink(f.name)
+
+    @staticmethod
     def select_with_fzf(options) -> list[str]:
-        input_text = "\n".join(options)
-        result = subprocess.run(
+        result = Select.run_fzf(
+            options,
             [
-                "fzf",
                 "--multi",
-                "--exact",
                 "--height",
                 "50%",
                 "--reverse",
@@ -21,8 +49,6 @@ class Select:
                 "--bind",
                 "ctrl-a:select-all,ctrl-r:toggle-all",
             ],
-            input=input_text.encode(),
-            stdout=subprocess.PIPE,
         )
         selected = result.stdout.decode().strip().split("\n")
         return selected if selected != [""] else []
@@ -55,11 +81,8 @@ class Select:
 
     @staticmethod
     def select_fzf_one(options) -> str | None:
-        input_text = "\n".join(options)
-        result = subprocess.run(
-            ["fzf", "--exact", "--height", "50%", "--reverse", "--no-mouse"],
-            input=input_text.encode(),
-            stdout=subprocess.PIPE,
+        result = Select.run_fzf(
+            options, ["--height", "50%", "--reverse", "--no-mouse"]
         )
         selected = result.stdout.decode().strip()
         return selected if selected else None
