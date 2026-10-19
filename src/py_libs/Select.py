@@ -23,8 +23,7 @@ class Select:
         ) as f:
             f.write("\n".join(lines))
         filter_cmd = " ".join(
-            shlex.quote(a)
-            for a in (sys.executable, fzf_word_filter.__file__)
+            shlex.quote(a) for a in (sys.executable, fzf_word_filter.__file__)
         )
         reload_cmd = f"{filter_cmd} {{q}} {shlex.quote(f.name)} || true"
         try:
@@ -81,8 +80,6 @@ class Select:
 
     @staticmethod
     def select_fzf_one(options) -> str | None:
-        result = Select.run_fzf(
-            options, ["--height", "50%", "--reverse", "--no-mouse"]
-        )
+        result = Select.run_fzf(options, ["--height", "50%", "--reverse", "--no-mouse"])
         selected = result.stdout.decode().strip()
         return selected if selected else None

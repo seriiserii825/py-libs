@@ -9,6 +9,7 @@ the last at least MIN_CHUNK chars (no letter-by-letter fuzzy matching):
 
 Usage: python fzf_word_filter.py <query> <file with lines>
 """
+
 import re
 import sys
 
