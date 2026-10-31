@@ -8,7 +8,6 @@ from py_libs.MyTable import MyTable
 from py_libs.Print import Print
 from py_libs.Select import Select
 
-
 INDEX_COLOR = "magenta"
 
 

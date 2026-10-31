@@ -5,10 +5,10 @@ import sys
 import tempfile
 from typing import List
 
-from py_libs import fzf_word_filter
-
 import questionary
 from simple_term_menu import TerminalMenu
+
+from py_libs import fzf_word_filter
 
 
 class Select:

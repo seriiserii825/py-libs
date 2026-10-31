@@ -60,6 +60,9 @@ class InputValidator:
 
     @staticmethod
     def confirm(question: str) -> bool:
-        """Ask a yes/no question defaulting to yes: Enter, 'y' or 'Y' confirm, 'n' declines."""
+        """Ask a yes/no question that defaults to yes.
+
+        Enter, 'y' or 'Y' confirm; 'n' or 'no' declines.
+        """
         value = console.input(f"{question} (Y/n, Y - press Enter): ").strip().lower()
         return value not in ("n", "no")
